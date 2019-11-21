@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pucminas.dad.api.model.Doacao;
-import br.com.pucminas.reposiroty.DoacaoRepository;
+import br.com.pucminas.dad.api.model.Pessoa;
+import br.com.pucminas.dad.api.reposiroty.DoacaoRepository;
+import br.com.pucminas.dad.api.service.ApiService;
 
 @RestController
 @RequestMapping("doacao")
@@ -23,6 +25,9 @@ public class DoacaoController {
 	@Autowired
 	private DoacaoRepository doacaoRepository;
 	
+	@Autowired
+	private ApiService apiService;
+	
 	@GetMapping
 	public List<Doacao> listar(){
 		return this.doacaoRepository.findAll();
@@ -30,7 +35,10 @@ public class DoacaoController {
 	
 	@PostMapping
 	public ResponseEntity<?> cadastrar(@RequestBody Doacao d){
-		this.doacaoRepository.save(d);
+		Pessoa p = this.apiService.findPessoaByCpf(d.getCpf()); 
+		if(p != null){
+			this.apiService.cadastrarDoacao(d);
+		}
 		return ResponseEntity.status(HttpStatus.CREATED).body(d);
 	}
 	

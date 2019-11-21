@@ -2,6 +2,7 @@ package br.com.pucminas.dad.api.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,12 +19,17 @@ public class Doacao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name = "VALOR")
 	private Double valor;
 
+	@Column(name = "DIA")
 	private Date data;
 	
+	@Column(name = "CPF")
+	private Long cpf;
+	
 	@ManyToOne
-	@JoinColumn(name = "id")
+    @JoinColumn(name = "PESSOA", referencedColumnName = "ID")
 	private Pessoa doador;
 	
 	public Doacao() {}
@@ -119,6 +125,20 @@ public class Doacao {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	/**
+	 * @return the cpf
+	 */
+	public Long getCpf() {
+		return cpf;
+	}
+
+	/**
+	 * @param cpf the cpf to set
+	 */
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
 	}
 	
 	

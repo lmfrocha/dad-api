@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pucminas.dad.api.model.Pessoa;
-import br.com.pucminas.reposiroty.PessoaRepository;
+import br.com.pucminas.dad.api.reposiroty.PessoaRepository;
 
 @RestController
 @RequestMapping("pessoa")
