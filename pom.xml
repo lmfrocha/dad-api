@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.pucminas.dad</groupId>
 	<artifactId>doacoes-api</artifactId>
-	<version>0.0.1</version>
+	<version>api</version>
 	<name>doacoes-api</name>
 	<description>Projeto de controle de doações</description>
 
