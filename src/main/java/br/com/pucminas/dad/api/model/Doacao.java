@@ -1,71 +1,93 @@
 package br.com.pucminas.dad.api.model;
 
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pessoa")
-public class Pessoa {
-
+@Table(name =  "doacao")
+public class Doacao {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Long cpf;
+	private Double valor;
 
-	private String nome;
+	private Date data;
 	
-	private String endereco;
+	@ManyToOne
+	@JoinColumn(name = "id")
+	private Pessoa doador;
 	
-	@OneToMany
-	@JoinColumn(name= "id")
-	private List<Doacao> doacoes;
+	public Doacao() {}
 
+	public Doacao(Double valor, Date data, Pessoa doador) {
+		this.valor = valor;
+		this.data = data;
+		this.doador = doador;
+	}
+
+	/**
+	 * @return the id
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Long getCpf() {
-		return cpf;
+	/**
+	 * @return the valor
+	 */
+	public Double getValor() {
+		return valor;
 	}
 
-	public void setCpf(Long cpf) {
-		this.cpf = cpf;
+	/**
+	 * @param valor the valor to set
+	 */
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 
-	public String getNome() {
-		return nome;
+	/**
+	 * @return the data
+	 */
+	public Date getData() {
+		return data;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	/**
+	 * @param data the data to set
+	 */
+	public void setData(Date data) {
+		this.data = data;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	/**
+	 * @return the doador
+	 */
+	public Pessoa getDoador() {
+		return doador;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
-	public List<Doacao> getDoacoes() {
-		return doacoes;
-	}
-
-	public void setDoacoes(List<Doacao> doacoes) {
-		this.doacoes = doacoes;
+	/**
+	 * @param doador the doador to set
+	 */
+	public void setDoador(Pessoa doador) {
+		this.doador = doador;
 	}
 
 	/* (non-Javadoc)
@@ -90,7 +112,7 @@ public class Pessoa {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pessoa other = (Pessoa) obj;
+		Doacao other = (Doacao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -98,5 +120,7 @@ public class Pessoa {
 			return false;
 		return true;
 	}
+	
+	
 	
 }
