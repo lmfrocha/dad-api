@@ -1,5 +1,7 @@
 package br.com.pucminas.dad.api.service;
 
+import java.util.Date;
+
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,8 @@ public class ApiService {
 		Pessoa p = this.pessoaRepository.findByCpf(d.getCpf());
 		
 		d.setDoador(p);
-		
+		d.setCpf(p.getCpf());
+		d.setData(new Date());
 		this.doacaoRepository.save(d);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(d);

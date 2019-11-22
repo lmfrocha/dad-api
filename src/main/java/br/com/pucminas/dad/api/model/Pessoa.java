@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "pessoa")
 public class Pessoa {
@@ -31,7 +33,8 @@ public class Pessoa {
 	@Column(name = "EMAIL")
 	private String email;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "doador")
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "doador")
 	private List<Doacao> doacoes;
 	
 	/* (non-Javadoc)
