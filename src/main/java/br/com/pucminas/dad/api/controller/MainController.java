@@ -18,19 +18,23 @@ public class MainController {
 		return ResponseEntity.ok().body("[ "
 				
 				+ "{ "
-				+ "\"nome\":\"Ângelo Diniz\""
+				+ "\"nome\":\"Alessandra Faria Abreu\""
 				+ " }, "
 				
 				+ "{ "
-				+ "\"nome\":\"Alessandra Faria\""
+				+ "\"nome\":\"Angelo José Diniz Gama\""
 				+ " }, "
 				
 				+ "{ "
-				+ "\"nome\":\"Lucas Rocha\""
+				+ "\"nome\":\"César Augusto Tavares Júnior\""
+				+ " }, "
+
+				+ "{ "
+				+ "\"nome\":\"Lucas Marcelino Ferreira Rocha\""
 				+ " }, "
 				
 				+ "{ "
-				+ "\"nome\":\"Victor de Souza\""
+				+ "\"nome\":\"Victor de Souza Rezende\""
 				+ " } "				
 				
 				+ " ]");
