@@ -18,23 +18,29 @@ public class MainController {
 		return ResponseEntity.ok().body("[ "
 				
 				+ "{ "
-				+ "\"nome\":\"Alessandra Faria Abreu\""
+				+ "\"PUC MINAS\":\"Sistemas de Informação\","
+				+ "\"Disciplina\":\"DAD-PQS\","
+				+ "\"Professor\":\"Pedro\""
 				+ " }, "
 				
 				+ "{ "
-				+ "\"nome\":\"Angelo José Diniz Gama\""
+				+ "\"Aluno\":\"Alessandra Faria Abreu\""
 				+ " }, "
 				
 				+ "{ "
-				+ "\"nome\":\"César Augusto Tavares Júnior\""
+				+ "\"Aluno\":\"Angelo José Diniz Gama\""
+				+ " }, "
+				
+				+ "{ "
+				+ "\"Aluno\":\"César Augusto Tavares Júnior\""
 				+ " }, "
 
 				+ "{ "
-				+ "\"nome\":\"Lucas Marcelino Ferreira Rocha\""
+				+ "\"Aluno\":\"Lucas Marcelino Ferreira Rocha\""
 				+ " }, "
 				
 				+ "{ "
-				+ "\"nome\":\"Victor de Souza Rezende\""
+				+ "\"Aluno\":\"Victor de Souza Rezende\""
 				+ " } "				
 				
 				+ " ]");
