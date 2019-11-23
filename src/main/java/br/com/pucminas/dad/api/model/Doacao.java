@@ -13,10 +13,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name =  "doacao")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Doacao {
 	
 	@Id
@@ -25,12 +26,11 @@ public class Doacao {
 	
 	@Column(name = "VALOR")
 	private Double valor;
-
-	@JsonIgnore
-	@JsonFormat(pattern="dd-MM-yyyy HH-mm-ss")
+	
+	@JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
 	@Column(name = "DIA")
 	private Date data;
-	
+
 	@Column(name = "CPF")
 	private Long cpf;
 	

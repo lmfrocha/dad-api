@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import br.com.pucminas.dad.api.model.Doacao;
 import br.com.pucminas.dad.api.model.Pessoa;
@@ -33,12 +34,16 @@ public class ApiService {
 		
 		Pessoa p = this.pessoaRepository.findByCpf(d.getCpf());
 		
+		if(p == null) {
+			throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+		}
+		
 		d.setDoador(p);
 		d.setCpf(p.getCpf());
 		d.setData(new Date());
 		this.doacaoRepository.save(d);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(d);
+		return ResponseEntity.status(HttpStatus.CREATED).body(d);
 	}
 	
 	public Pessoa findPessoaByCpf(Long cpf) {

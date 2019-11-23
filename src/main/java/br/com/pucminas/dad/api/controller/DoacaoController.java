@@ -40,27 +40,24 @@ public class DoacaoController {
 			this.apiService.cadastrarDoacao(d);
 			return ResponseEntity.status(HttpStatus.CREATED).body(d);
 		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível cadastrar doação.");
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro, Pessoa não encontrada!.");
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getById(@PathVariable Long id) {
-		Doacao d = this.doacaoRepository.getOne(id);
-		if(d != null) {
-			return ResponseEntity.status(HttpStatus.FOUND).body(d);
+		if(this.doacaoRepository.existsById(id)) {
+			return ResponseEntity.status(HttpStatus.FOUND).body(this.doacaoRepository.getOne(id));
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doação Não encontrada.");
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteById(@PathVariable Long id) {
-		Doacao d = this.doacaoRepository.getOne(id);
-		if(d != null) {
+		if(this.doacaoRepository.existsById(id)) {
 			this.doacaoRepository.deleteById(id);
 			return ResponseEntity.status(HttpStatus.OK).body("Deletado com sucesso!");
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível deletar a doação.");
 	}
-	
 	
 }

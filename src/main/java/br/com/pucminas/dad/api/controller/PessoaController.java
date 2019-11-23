@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.pucminas.dad.api.model.Doacao;
 import br.com.pucminas.dad.api.model.Pessoa;
 import br.com.pucminas.dad.api.reposiroty.PessoaRepository;
 
@@ -25,7 +26,16 @@ public class PessoaController {
 	
 	@GetMapping
 	public List<Pessoa> listar(){
-		return this.pessoaRepository.findAll();
+		List<Pessoa> p = this.pessoaRepository.findAll();
+		for(int i = 0; i <p.size(); i++) {
+			List<Doacao> d = p.get(i).getDoacoes();
+			Double valor = 0D;
+			for(int x = 0; x<d.size(); x++) {
+				valor +=d.get(x).getValor();
+			}
+			p.get(i).setSaldoDoacoes(valor);
+		}
+		return p;
 	}
 	
 	@PostMapping
@@ -35,14 +45,21 @@ public class PessoaController {
 	}
 	
 	@GetMapping("/{id}")
-	public Pessoa getById(@PathVariable Long id) {
-		return this.pessoaRepository.getOne(id);
+	public ResponseEntity<?> getById(@PathVariable Long id) {
+		if(this.pessoaRepository.existsById(id)) {
+			return ResponseEntity.status(HttpStatus.FOUND).body(this.pessoaRepository.getOne(id));
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada!");
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteById(@PathVariable Long id) {
-		this.pessoaRepository.deleteById(id);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Deletado com sucesso");
+		Pessoa p = this.pessoaRepository.getOne(id);
+		if(p != null) {
+			this.pessoaRepository.delete(p);
+			return ResponseEntity.ok().body("Pessoa Deletada!");
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada!");
 	}
 	
 	

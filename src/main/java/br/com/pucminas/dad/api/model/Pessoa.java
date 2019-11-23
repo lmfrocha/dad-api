@@ -10,11 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "pessoa")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Pessoa {
 
 	@Id
@@ -33,8 +36,11 @@ public class Pessoa {
 	@Column(name = "EMAIL")
 	private String email;
 	
+	@Transient
+	private Double saldoDoacoes;
+	
 	@JsonManagedReference
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "doador")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "doador")
 	private List<Doacao> doacoes;
 	
 	/* (non-Javadoc)
@@ -152,4 +158,11 @@ public class Pessoa {
 		this.doacoes = doacoes;
 	}
 	
+	public Double getSaldoDoacoes() {
+		return saldoDoacoes;
+	}
+	
+	public void setSaldoDoacoes(Double saldoDoacoes) {
+		this.saldoDoacoes = saldoDoacoes;
+	}
 }
