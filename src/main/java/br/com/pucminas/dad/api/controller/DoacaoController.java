@@ -42,6 +42,14 @@ public class DoacaoController {
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro, Pessoa não encontrada!.");
 	}
+
+	@PostMapping("/lista")
+	public ResponseEntity<?> cadastrar(@RequestBody List<Doacao> d){
+		for(int i = 0; i<d.size(); i++) {
+			this.apiService.cadastrarDoacao(d.get(i));
+		}
+		return ResponseEntity.status(HttpStatus.CREATED).body(d);
+	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getById(@PathVariable Long id) {

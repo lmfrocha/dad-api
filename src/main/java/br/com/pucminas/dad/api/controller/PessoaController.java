@@ -44,6 +44,12 @@ public class PessoaController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(p);
 	}
 	
+	@PostMapping("/lista")
+	public ResponseEntity<?> cadastrar(@RequestBody List<Pessoa> p){
+		this.pessoaRepository.saveAll(p);
+		return ResponseEntity.status(HttpStatus.CREATED).body(p);
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getById(@PathVariable Long id) {
 		if(this.pessoaRepository.existsById(id)) {

@@ -1,7 +1,5 @@
 package br.com.pucminas.dad.api.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
