@@ -47,6 +47,13 @@ public class PessoaController {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getById(@PathVariable Long id) {
 		if(this.pessoaRepository.existsById(id)) {
+			Pessoa p = this.pessoaRepository.getOne(id);
+			List<Doacao> d = p.getDoacoes();
+			Double valor = 0D;
+			for(int x = 0; x<d.size(); x++) {
+				valor +=d.get(x).getValor();
+			}
+			p.setSaldoDoacoes(valor);
 			return ResponseEntity.status(HttpStatus.FOUND).body(this.pessoaRepository.getOne(id));
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada!");
