@@ -18,7 +18,7 @@ import br.com.pucminas.dad.api.model.Doacao;
 import br.com.pucminas.dad.api.model.Pessoa;
 import br.com.pucminas.dad.api.reposiroty.PessoaRepository;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 @RequestMapping("pessoa")
 public class PessoaController {

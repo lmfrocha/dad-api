@@ -19,7 +19,7 @@ import br.com.pucminas.dad.api.model.Pessoa;
 import br.com.pucminas.dad.api.reposiroty.DoacaoRepository;
 import br.com.pucminas.dad.api.service.ApiService;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 @RequestMapping("doacao")
 public class DoacaoController {
