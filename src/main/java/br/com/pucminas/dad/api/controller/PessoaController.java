@@ -66,6 +66,21 @@ public class PessoaController {
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada!");
 	}
+
+	@GetMapping("/{cpf}")
+	public ResponseEntity<?> getByCpf(@PathVariable Long cpf) {
+		Pessoa p = this.pessoaRepository.findByCpf(cpf);
+		if(this.pessoaRepository.existsById(p.getId())) {
+			List<Doacao> d = p.getDoacoes();
+			Double valor = 0D;
+			for(int x = 0; x<d.size(); x++) {
+				valor +=d.get(x).getValor();
+			}
+			p.setSaldoDoacoes(valor);
+			return ResponseEntity.status(HttpStatus.FOUND).body(p);
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada!");
+	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteById(@PathVariable Long id) {
