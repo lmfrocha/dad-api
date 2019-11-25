@@ -67,7 +67,7 @@ public class PessoaController {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada!");
 	}
 
-	@GetMapping("/{cpf}")
+	@GetMapping("/cpf/{cpf}")
 	public ResponseEntity<?> getByCpf(@PathVariable Long cpf) {
 		Pessoa p = this.pessoaRepository.findByCpf(cpf);
 		if(this.pessoaRepository.existsById(p.getId())) {
